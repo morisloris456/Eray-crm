@@ -1,0 +1,909 @@
+import { useMemo, useState, useCallback } from "react";
+import {
+  Users,
+  Target,
+  TrendingUp,
+  Calendar,
+  DollarSign,
+  Briefcase,
+  CheckCircle2,
+  Clock,
+  BarChart3,
+  PieChart,
+  Activity,
+  ArrowUpRight,
+  Plus,
+  Download,
+  RefreshCw,
+  AlertCircle,
+  Eye,
+  EyeOff,
+} from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import { useData } from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
+import StatCard from "../components/StatCard";
+import DashboardGrid from "../components/DashboardGrid";
+import UniversalSearch from "../components/UniversalSearch";
+import {
+  AreaChart,
+  Area,
+  BarChart,
+  Bar,
+  PieChart as RechartsPieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+type TimeRange = "week" | "month" | "year";
+type ViewMode = "overview" | "detailed" | "analytics";
+
+const parseAmount = (amount?: string) => {
+  if (!amount) return 0;
+  return parseInt(amount.replace(/[^0-9]/g, ""), 10) || 0;
+};
+
+const Dashboard = () => {
+  const { user } = useAuth();
+  const { clients, deals, projects } = useData();
+  const navigate = useNavigate();
+  const [timeRange, setTimeRange] = useState<TimeRange>("month");
+  const [viewMode, setViewMode] = useState<ViewMode>("overview");
+  const [showCharts, setShowCharts] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleRefreshData = useCallback(async () => {
+    setIsLoading(true);
+    // Simuler un rafraîchissement
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  const handleExportData = useCallback(() => {
+    // Implémenter l'export des données du dashboard
+    const exportStats = {
+      clients: {
+        total: clients.length,
+        active: clients.filter((c) => c.status === "Actif").length,
+        newThisMonth: clients.filter((c) => {
+          const createdAt = new Date(c.createdAt);
+          const now = new Date();
+          return (
+            createdAt.getMonth() === now.getMonth() &&
+            createdAt.getFullYear() === now.getFullYear()
+          );
+        }).length,
+      },
+      deals: {
+        total: deals.length,
+        active: deals.filter((d) => d.stage !== "won" && d.stage !== "lost").length,
+        won: deals.filter((d) => d.stage === "won").length,
+        revenue: deals.filter(d => d.stage === 'won').reduce((sum, deal) => {
+          return sum + parseAmount(deal.amount);
+        }, 0),
+      },
+      projects: {
+        total: projects.length,
+        active: projects.filter((p) => p.status === "en_cours").length,
+        completed: projects.filter((p) => p.status === "termine").length,
+      }
+    };
+    
+    const data = {
+      stats: exportStats,
+      exportDate: new Date().toISOString()
+    };
+    
+    // Créer un blob JSON et télécharger
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dashboard-export-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [clients, deals, projects]);
+
+  const handleTimeRangeChange = useCallback((range: TimeRange) => {
+    setTimeRange(range);
+  }, []);
+
+  const handleViewAllDeals = useCallback(() => {
+    navigate("/pipeline");
+  }, [navigate]);
+
+  const handleViewClientDetails = useCallback((_clientId: number) => {
+    navigate("/clients");
+  }, [navigate]);
+
+  const handleViewDealDetails = useCallback((_dealId: number) => {
+    navigate("/projects");
+  }, [navigate]);
+
+  const handleViewProjectDetails = useCallback((_projectId: number) => {
+    navigate("/projects");
+  }, [navigate]);
+
+  const handleCreateNewClient = useCallback(() => {
+    navigate("/clients");
+  }, [navigate]);
+
+  const handleCreateNewProject = useCallback(() => {
+    navigate("/projects");
+  }, [navigate]);
+
+  const handleSearchResultSelect = useCallback((result: any) => {
+    console.log('Résultat de recherche sélectionné:', result);
+    // Navigation basée sur le type de résultat
+    switch (result.type) {
+      case 'client':
+        navigate(`/clients?search=${result.id}`);
+        break;
+      case 'deal':
+        navigate(`/pipeline?search=${result.id}`);
+        break;
+      case 'project':
+        navigate(`/projects?search=${result.id}`);
+        break;
+      default:
+        break;
+    }
+  }, [navigate]);
+
+  // =========================
+  // STATISTIQUES CALCULÉES
+  // =========================
+  const stats = useMemo(() => {
+    const now = new Date();
+
+    // Clients
+    const totalClients = clients.length;
+    const activeClients = clients.filter((c) => c.status === "Actif").length;
+
+    const newClientsThisMonth = clients.filter((c) => {
+      const createdAt = new Date(c.createdAt);
+      return (
+        createdAt.getMonth() === now.getMonth() &&
+        createdAt.getFullYear() === now.getFullYear()
+      );
+    }).length;
+
+    // Deals
+    const totalDeals = deals.length;
+    const activeDeals = deals.filter((d) => d.stage !== "won" && d.stage !== "lost");
+    const wonDeals = deals.filter((d) => d.stage === "won");
+    const lostDeals = deals.filter((d) => d.stage === "lost");
+
+    const totalRevenue = wonDeals.reduce((sum, deal) => {
+      return sum + parseAmount(deal.amount);
+    }, 0);
+
+    const projectedRevenue = activeDeals.reduce((sum, deal) => {
+      const value = parseAmount(deal.amount);
+      return sum + (value * (deal.probability || 50)) / 100;
+    }, 0);
+
+    const conversionRate =
+      totalDeals > 0 ? Math.round((wonDeals.length / totalDeals) * 100) : 0;
+
+    // Projets
+    const totalProjects = projects.length;
+    const activeProjects = projects.filter((p) => p.status === "en_cours").length;
+    const completedProjects = projects.filter((p) => p.status === "termine").length;
+    const archivedProjects = projects.filter((p) => p.status === "archive").length;
+
+    return {
+      clients: {
+        total: totalClients,
+        active: activeClients,
+        newThisMonth: newClientsThisMonth,
+        growthRate:
+          totalClients > 0 ? Math.round((newClientsThisMonth / totalClients) * 100) : 0,
+      },
+      deals: {
+        total: totalDeals,
+        active: activeDeals.length,
+        won: wonDeals.length,
+        lost: lostDeals.length,
+        revenue: totalRevenue,
+        projected: projectedRevenue,
+        conversionRate,
+      },
+      projects: {
+        total: totalProjects,
+        active: activeProjects,
+        completed: completedProjects,
+        archived: archivedProjects,
+        completionRate:
+          totalProjects > 0 ? Math.round((completedProjects / totalProjects) * 100) : 0,
+      },
+    };
+  }, [clients, deals, projects]);
+
+  // =========================
+  // DONNÉES POUR GRAPHIQUES
+  // =========================
+  const dealsByStage = useMemo(() => {
+    const stages = ["prospects", "contacted", "proposal", "negotiation", "won", "lost"];
+
+    return stages.map((stage) => ({
+      name: stage.charAt(0).toUpperCase() + stage.slice(1),
+      value: deals.filter((d) => d.stage === stage).length,
+      color: stage === "won" ? "#10b981" : stage === "lost" ? "#ef4444" : "#3b82f6",
+    }));
+  }, [deals]);
+
+  const projectStatus = useMemo(
+    () => [
+      { name: "En Cours", value: stats.projects.active, color: "#3b82f6" },
+      { name: "Terminés", value: stats.projects.completed, color: "#10b981" },
+      { name: "Archivés", value: stats.projects.archived, color: "#6b7280" },
+    ],
+    [stats.projects]
+  );
+
+  // Données pour le graphique d'évolution mensuelle
+  const monthlyData = useMemo(() => {
+    const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+    const currentMonth = new Date().getMonth();
+    
+    return months.slice(0, currentMonth + 1).map((month, index) => {
+      const monthDeals = deals.filter(d => {
+        const dealDate = new Date(d.createdAt);
+        return dealDate.getMonth() === index && dealDate.getFullYear() === new Date().getFullYear();
+      });
+      
+      const monthProjects = projects.filter(p => {
+        const projectDate = new Date(p.createdAt);
+        return projectDate.getMonth() === index && projectDate.getFullYear() === new Date().getFullYear();
+      });
+      
+      const monthRevenue = monthDeals
+        .filter(d => d.stage === 'won')
+        .reduce((sum, deal) => sum + parseAmount(deal.amount), 0);
+      
+      return {
+        month,
+        deals: monthDeals.length,
+        projects: monthProjects.length,
+        revenue: monthRevenue,
+        clients: clients.filter(c => {
+          const clientDate = new Date(c.createdAt);
+          return clientDate.getMonth() === index && clientDate.getFullYear() === new Date().getFullYear();
+        }).length
+      };
+    });
+  }, [deals, projects, clients]);
+
+  // Données pour le graphique de performance
+  const performanceData = useMemo(() => [
+    { metric: 'Conversion', value: stats.deals.conversionRate, max: 100, unit: '%' },
+    { metric: 'Completion', value: stats.projects.completionRate, max: 100, unit: '%' },
+    { metric: 'Clients Actifs', value: stats.clients.active, max: stats.clients.total || 1, unit: '' },
+    { metric: 'Projets Actifs', value: stats.projects.active, max: stats.projects.total || 1, unit: '' },
+  ], [stats]);
+
+  // =========================
+  // DONNÉES RÉCENTES
+  // =========================
+  const recentClients = useMemo(
+    () =>
+      [...clients]
+        .sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+        .slice(0, 5),
+    [clients]
+  );
+
+  const recentDeals = useMemo(
+    () =>
+      [...deals]
+        .sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+        .slice(0, 5),
+    [deals]
+  );
+
+  const upcomingDeadlines = useMemo(() => {
+    const now = new Date();
+
+    return projects
+      .filter((p) => p.status === "en_cours" && p.endDate)
+      .filter((p) => {
+        if (!p.endDate) return false;
+        const endDate = new Date(p.endDate);
+        const daysUntil = Math.ceil(
+          (endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+        );
+        return daysUntil <= 30 && daysUntil >= 0;
+      })
+      .sort((a, b) => new Date(a.endDate!).getTime() - new Date(b.endDate!).getTime())
+      .slice(0, 5);
+  }, [projects]);
+
+  const projectedGrowth =
+    stats.deals.revenue > 0
+      ? Math.round((stats.deals.projected / stats.deals.revenue) * 100)
+      : 0;
+
+  return (
+    <div className="space-y-6 text-left">
+      {/* HEADER */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800">
+            Tableau de Bord{user?.name ? `, ${user.name}` : ""}
+          </h1>
+          <p className="text-[13px] font-medium text-gray-500">
+            Vue d&apos;ensemble complète de votre activité Eray Digital
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 rounded-xl border border-gray-100 bg-white px-4 py-2 text-sm font-bold text-gray-700 shadow-sm">
+            <Calendar className="h-4 w-4 text-blue-500" />
+            {new Date().toLocaleDateString("fr-FR", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* NOUVEAU SYSTÈME DE WIDGETS */}
+      <DashboardGrid />
+
+      {/* BARRE D'OUTILS OPTIMISÉE */}
+      <div className="flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm border border-gray-100">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          {/* Recherche universelle et filtres */}
+          <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="flex-1 max-w-md">
+              <UniversalSearch 
+                onResultSelect={handleSearchResultSelect}
+                placeholder="Rechercher clients, projets, deals..."
+                className="w-full"
+              />
+            </div>
+            
+            <div className="flex items-center gap-2">
+              {/* Filtre de période */}
+              <select
+                value={timeRange}
+                onChange={(e) => handleTimeRangeChange(e.target.value as TimeRange)}
+                className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm"
+              >
+                <option value="week">Cette semaine</option>
+                <option value="month">Ce mois</option>
+                <option value="year">Cette année</option>
+              </select>
+              
+              {/* Actions rapides */}
+              <button
+                onClick={() => setShowCharts(!showCharts)}
+                className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
+                {showCharts ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showCharts ? "Cacher" : "Voir"} Graphiques
+              </button>
+              
+              <button
+                onClick={handleRefreshData}
+                disabled={isLoading}
+                className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+              >
+                <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+                Actualiser
+              </button>
+              
+              <button
+                onClick={handleExportData}
+                className="flex items-center gap-2 rounded-xl bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              >
+                <Download className="h-4 w-4" />
+                Exporter
+              </button>
+            </div>
+          </div>
+          
+          {/* Sélecteurs de vue */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center rounded-xl border border-gray-200 bg-white p-1">
+              {(['overview', 'detailed', 'analytics'] as ViewMode[]).map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => setViewMode(mode)}
+                  className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                    viewMode === mode
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-600 hover:text-gray-800'
+                  }`}
+                >
+                  {mode === 'overview' ? 'Vue d\'ensemble' : mode === 'detailed' ? 'Détaillé' : 'Analytiques'}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* CARDS MÉTRIQUES PRINCIPALES */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          title="Total Clients"
+          value={stats.clients.total.toString()}
+          icon={Users}
+          trend={{ value: `+${stats.clients.newThisMonth}`, positive: true }}
+          color="bg-blue-100 text-blue-600"
+          onClick={handleCreateNewClient}
+        />
+
+        <StatCard
+          title="Deals Actifs"
+          value={stats.deals.active.toString()}
+          icon={Target}
+          trend={{
+            value: `${stats.deals.conversionRate}% conv.`,
+            positive: stats.deals.conversionRate > 20,
+          }}
+          color="bg-purple-100 text-purple-600"
+          onClick={handleViewAllDeals}
+        />
+
+        <StatCard
+          title="Revenu Total"
+          value={`${stats.deals.revenue.toLocaleString()} Ar`}
+          icon={DollarSign}
+          trend={{ value: `+${projectedGrowth}%`, positive: projectedGrowth > 0 }}
+          color="bg-green-100 text-green-600"
+          onClick={handleViewAllDeals}
+        />
+
+        <StatCard
+          title="Projets en Cours"
+          value={stats.projects.active.toString()}
+          icon={Briefcase}
+          trend={{
+            value: `${stats.projects.completionRate}% complété`,
+            positive: stats.projects.completionRate > 50,
+          }}
+          color="bg-orange-100 text-orange-600"
+          onClick={handleCreateNewProject}
+        />
+      </div>
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                  labelStyle={{ color: '#374151', fontWeight: 'bold' }}
+                />
+                <Legend />
+                <Area 
+                  type="monotone" 
+                  dataKey="deals" 
+                  stackId="1"
+                  stroke="#3b82f6" 
+                  fill="#93bbfc" 
+                  name="Deals"
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="projects" 
+                  stackId="1"
+                  stroke="#10b981" 
+                  fill="#86efac" 
+                  name="Projets"
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="clients" 
+                  stackId="1"
+                  stroke="#f59e0b" 
+                  fill="#fcd34d" 
+                  name="Clients"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {/* Pipeline des ventes amélioré */}
+            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5 text-blue-500" />
+                  <h3 className="text-lg font-bold text-gray-800">Pipeline des Ventes</h3>
+                </div>
+                <button
+                  onClick={handleViewAllDeals}
+                  className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                >
+                  Voir tout →
+                </button>
+              </div>
+
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={dealsByStage}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="name" stroke="#6b7280" fontSize={12} />
+                  <YAxis stroke="#6b7280" fontSize={12} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                  />
+                  <Bar dataKey="value" name="Deals">
+                    {dealsByStage.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+
+              <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <p className="text-2xl font-bold text-green-600">{stats.deals.won}</p>
+                  <p className="text-xs text-gray-500">Gagnés</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-blue-600">{stats.deals.active}</p>
+                  <p className="text-xs text-gray-500">Actifs</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-red-600">{stats.deals.lost}</p>
+                  <p className="text-xs text-gray-500">Perdus</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Graphique de performance */}
+            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="mb-6 flex items-center gap-2">
+                <Activity className="h-5 w-5 text-purple-500" />
+                <h3 className="text-lg font-bold text-gray-800">Indicateurs de Performance</h3>
+              </div>
+
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={performanceData} layout="horizontal">
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis type="number" stroke="#6b7280" fontSize={12} />
+                  <YAxis dataKey="metric" type="category" stroke="#6b7280" fontSize={12} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                    formatter={(value: any) => [`${value}${performanceData.find(d => d.value === value)?.unit || ''}`, 'Valeur']}
+                  />
+                  <Bar dataKey="value" fill="#8b5cf6" radius={[0, 8, 8, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Répartition projets avec camembert */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="mb-6 flex items-center gap-2">
+                <PieChart className="h-5 w-5 text-purple-500" />
+                <h3 className="text-lg font-bold text-gray-800">Répartition Projets</h3>
+              </div>
+
+              <ResponsiveContainer width="100%" height={200}>
+                <RechartsPieChart>
+                  <Pie
+                    data={projectStatus}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {projectStatus.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </RechartsPieChart>
+              </ResponsiveContainer>
+
+              <div className="mt-4 space-y-2">
+                {projectStatus.map((status) => (
+                  <div key={status.name} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="h-3 w-3 rounded-full"
+                        style={{ backgroundColor: status.color }}
+                      />
+                      <span className="text-sm font-medium text-gray-700">{status.name}</span>
+                    </div>
+                    <span className="text-sm font-bold text-gray-800">{status.value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 border-t border-gray-100 pt-4">
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-purple-600">
+                    {stats.projects.completionRate}%
+                  </p>
+                  <p className="text-xs text-gray-500">Taux de complétion</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Alertes et indicateurs */}
+            <div className="lg:col-span-2 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="mb-6 flex items-center gap-2">
+                <AlertCircle className="h-5 w-5 text-orange-500" />
+                <h3 className="text-lg font-bold text-gray-800">Alertes et Actions Rapides</h3>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
+                  <div className="flex items-start gap-3">
+                    <Clock className="h-5 w-5 text-orange-500 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-gray-800">Échéances imminentes</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {upcomingDeadlines.length} projet(s) à finaliser ce mois-ci
+                      </p>
+                      <button 
+                        onClick={handleCreateNewProject}
+                        className="mt-2 text-sm font-medium text-orange-600 hover:text-orange-700"
+                      >
+                        Voir les détails →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                  <div className="flex items-start gap-3">
+                    <Target className="h-5 w-5 text-blue-500 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-gray-800">Deals en attente</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {stats.deals.active} deals nécessitent votre attention
+                      </p>
+                      <button 
+                        onClick={handleViewAllDeals}
+                        className="mt-2 text-sm font-medium text-blue-600 hover:text-blue-700"
+                      >
+                        Gérer les deals →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+                  <div className="flex items-start gap-3">
+                    <Users className="h-5 w-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-gray-800">Nouveaux clients</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {stats.clients.newThisMonth} nouveau(x) client(s) ce mois
+                      </p>
+                      <button 
+                        onClick={handleCreateNewClient}
+                        className="mt-2 text-sm font-medium text-green-600 hover:text-green-700"
+                      >
+                        Voir les clients →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
+                  <div className="flex items-start gap-3">
+                    <TrendingUp className="h-5 w-5 text-purple-500 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-gray-800">Performance globale</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        Taux de conversion: {stats.deals.conversionRate}%
+                      </p>
+                      <button 
+                        onClick={() => setViewMode('analytics')}
+                        className="mt-2 text-sm font-medium text-purple-600 hover:text-purple-700"
+                      >
+                        Voir les analytics →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* LISTES */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        {/* CLIENTS */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="h-5 w-5 text-blue-500" />
+              <h3 className="text-lg font-bold text-gray-800">Clients Récents</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">{recentClients.length}</span>
+              <button
+                onClick={handleCreateNewClient}
+                className="rounded-lg bg-blue-100 p-1 text-blue-600 hover:bg-blue-200 transition-colors"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {recentClients.map((client) => (
+              <div
+                key={client.id}
+                onClick={() => handleViewClientDetails(client.id)}
+                className="flex items-center justify-between rounded-xl bg-gray-50 p-3 transition-colors hover:bg-gray-100 cursor-pointer"
+              >
+                <div>
+                  <p className="text-sm font-medium text-gray-800">{client.name}</p>
+                  <p className="text-xs text-gray-500">{client.company}</p>
+                </div>
+                <span
+                  className={`rounded-lg px-2 py-1 text-[10px] font-semibold ${
+                    client.status === "Actif"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-blue-100 text-blue-600"
+                  }`}
+                >
+                  {client.status}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* DEALS */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Target className="h-5 w-5 text-purple-500" />
+              <h3 className="text-lg font-bold text-gray-800">Deals Récents</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">{recentDeals.length}</span>
+              <button
+                onClick={handleViewAllDeals}
+                className="rounded-lg bg-purple-100 p-1 text-purple-600 hover:bg-purple-200 transition-colors"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {recentDeals.map((deal) => (
+              <div
+                key={deal.id}
+                onClick={() => handleViewDealDetails(deal.id)}
+                className="flex items-center justify-between rounded-xl bg-gray-50 p-3 transition-colors hover:bg-gray-100 cursor-pointer"
+              >
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-800">{deal.title}</p>
+                  <p className="text-xs text-gray-500">{deal.client}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium text-gray-800">{deal.amount}</p>
+                  <p className="text-xs text-gray-500">{deal.probability}%</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ÉCHÉANCES */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Clock className="h-5 w-5 text-orange-500" />
+              <h3 className="text-lg font-bold text-gray-800">Échéances</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">{upcomingDeadlines.length}</span>
+              <button
+                onClick={handleCreateNewProject}
+                className="rounded-lg bg-orange-100 p-1 text-orange-600 hover:bg-orange-200 transition-colors"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {upcomingDeadlines.map((project) => {
+              const daysUntil = Math.ceil(
+                (new Date(project.endDate!).getTime() - new Date().getTime()) /
+                  (1000 * 60 * 60 * 24)
+              );
+
+              return (
+                <div
+                  key={project.id}
+                  onClick={() => handleViewProjectDetails(project.id)}
+                  className="flex items-center justify-between rounded-xl bg-gray-50 p-3 transition-colors hover:bg-gray-100 cursor-pointer"
+                >
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-800">{project.title}</p>
+                    <p className="text-xs text-gray-500">{project.client}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs font-medium text-gray-800">
+                      {daysUntil === 0
+                        ? "Aujourd’hui"
+                        : daysUntil === 1
+                        ? "Demain"
+                        : `Dans ${daysUntil}j`}
+                    </p>
+                    <p className="text-xs text-gray-500">{project.progress}%</p>
+                  </div>
+                </div>
+              );
+            })}
+
+            {upcomingDeadlines.length === 0 && (
+              <div className="py-4 text-center text-sm text-gray-500">
+                Aucune échéance à venir
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* RÉSUMÉ FINANCIER */}
+      <div className="rounded-2xl bg-linear-to-r from-blue-600 to-purple-600 p-6 text-white">
+        <div className="mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <DollarSign className="h-6 w-6" />
+            <h3 className="text-xl font-bold">Résumé Financier</h3>
+          </div>
+          <Activity className="h-5 w-5 opacity-80" />
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="rounded-xl bg-white/10 p-4 backdrop-blur">
+            <p className="mb-1 text-sm opacity-90">Revenu Gagné</p>
+            <p className="text-2xl font-bold">{stats.deals.revenue.toLocaleString()} Ar</p>
+            <div className="mt-2 flex items-center gap-1 text-xs">
+              <ArrowUpRight className="h-3 w-3" />
+              <span>+12% vs mois dernier</span>
+            </div>
+          </div>
+
+          <div className="rounded-xl bg-white/10 p-4 backdrop-blur">
+            <p className="mb-1 text-sm opacity-90">Revenu Prévisionnel</p>
+            <p className="text-2xl font-bold">{stats.deals.projected.toLocaleString()} Ar</p>
+            <div className="mt-2 flex items-center gap-1 text-xs">
+              <TrendingUp className="h-3 w-3" />
+              <span>Basé sur {stats.deals.active} deals actifs</span>
+            </div>
+          </div>
+
+          <div className="rounded-xl bg-white/10 p-4 backdrop-blur">
+            <p className="mb-1 text-sm opacity-90">Taux Conversion</p>
+            <p className="text-2xl font-bold">{stats.deals.conversionRate}%</p>
+            <div className="mt-2 flex items-center gap-1 text-xs">
+              <CheckCircle2 className="h-3 w-3" />
+              <span>{stats.deals.won} deals gagnés</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;

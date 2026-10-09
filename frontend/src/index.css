@@ -1,0 +1,2157 @@
+@import "tailwindcss";
+html {
+  font-size: 11px; /* Par défaut c'est 16px. */
+}
+
+/* Dark mode styles - Couverture complète */
+.dark {
+  background-color: rgb(17 24 39);
+}
+
+/* Backgrounds */
+.dark .bg-white {
+  background-color: rgb(31 41 55);
+}
+
+.dark .bg-gray-50 {
+  background-color: rgb(17 24 39);
+}
+
+.dark .bg-gray-100 {
+  background-color: rgb(31 41 55);
+}
+
+.dark .bg-blue-50 {
+  background-color: rgb(30 58 138);
+}
+
+.dark .bg-slate-50 {
+  background-color: rgb(30 41 59);
+}
+
+.dark .bg-blue-100 {
+  background-color: rgb(59 130 246);
+}
+
+.dark .bg-purple-100 {
+  background-color: rgb(147 51 234);
+}
+
+.dark .bg-green-100 {
+  background-color: rgb(34 197 94);
+}
+
+.dark .bg-orange-100 {
+  background-color: rgb(251 146 60);
+}
+
+.dark .bg-orange-100 {
+  background-color: rgb(124 45 18 / 0.45) !important;
+}
+
+
+.dark .bg-amber-100 {
+  background-color: rgb(245 158 11);
+}
+
+/* Text colors */
+.dark .text-gray-800 {
+  color: rgb(243 244 246);
+}
+
+.dark .text-gray-700 {
+  color: rgb(229 231 235);
+}
+
+.dark .text-gray-600 {
+  color: rgb(156 163 175);
+}
+
+.dark .text-gray-500 {
+  color: rgb(107 114 128);
+}
+
+.dark .text-slate-800 {
+  color: rgb(241 245 249);
+}
+
+.dark .text-slate-600 {
+  color: rgb(148 163 184);
+}
+
+.dark .text-blue-600 {
+  color: rgb(96 165 250);
+}
+
+.dark .text-purple-600 {
+  color: rgb(196 181 253);
+}
+
+.dark .text-green-600 {
+  color: rgb(134 239 172);
+}
+
+.dark .text-orange-600 {
+  color: rgb(251 191 36);
+}
+
+.dark .text-red-600 {
+  color: rgb(248 113 113);
+}
+
+.dark .text-amber-600 {
+  color: rgb(252 211 77);
+}
+
+.dark .text-blue-700 {
+  color: rgb(59 130 246);
+}
+
+.dark .text-red-700 {
+  color: rgb(220 38 38);
+}
+
+.dark .text-blue-900 {
+  color: rgb(30 58 138);
+}
+
+.dark .text-green-700 {
+  color: rgb(21 128 61);
+}
+
+/* Borders */
+.dark .border-gray-200 {
+  border-color: rgb(75 85 99);
+}
+
+.dark .border-slate-200 {
+  border-color: rgb(71 85 105);
+}
+
+.dark .border-blue-200 {
+  border-color: rgb(59 130 246);
+}
+
+.dark .border-red-200 {
+  border-color: rgb(239 68 68);
+}
+
+/* Hover states */
+.dark .hover\:bg-gray-100:hover {
+  background-color: rgb(55 65 81);
+}
+
+.dark .hover\:bg-slate-50:hover {
+  background-color: rgb(51 65 85);
+}
+
+.dark .hover\:bg-gray-200:hover {
+  background-color: rgb(75 85 99);
+}
+
+.dark .hover\:bg-blue-200:hover {
+  background-color: rgb(59 130 246);
+}
+
+.dark .hover\:bg-blue-100:hover {
+  background-color: rgb(96 165 250);
+}
+
+.dark .hover\:bg-red-100:hover {
+  background-color: rgb(248 113 113);
+}
+
+.dark .hover\:bg-amber-200:hover {
+  background-color: rgb(252 211 77);
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: rgb(31 41 55);
+}
+
+/* Focus states */
+.dark .focus\:border-blue-500:focus {
+  border-color: rgb(59 130 246);
+}
+
+.dark .focus\:bg-white:focus {
+  background-color: rgb(31 41 55);
+}
+
+.dark .focus\:ring-blue-500:focus {
+  --tw-ring-color: rgb(59 130 246);
+}
+
+.dark .focus\:ring-gray-500:focus {
+  --tw-ring-color: rgb(107 114 128);
+}
+
+/* Shadow adjustments */
+.dark .shadow-lg {
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.3),
+    0 4px 6px -2px rgb(0 0 0 / 0.2);
+}
+
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+}
+
+.dark .shadow-blue-100 {
+  box-shadow:
+    0 1px 3px 0 rgb(59 130 246 / 0.3),
+    0 1px 2px 0 rgb(59 130 246 / 0.2);
+}
+
+.dark .shadow-red-100 {
+  box-shadow:
+    0 1px 3px 0 rgb(239 68 68 / 0.3),
+    0 1px 2px 0 rgb(239 68 68 / 0.2);
+}
+
+/* Linear gradients */
+.dark .bg-linear-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.dark .from-slate-50 {
+  --tw-gradient-from: rgb(30 41 59);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), var(--tw-gradient-to, rgb(30 41 59 / 0));
+}
+
+.dark .to-blue-50 {
+  --tw-gradient-to: rgb(30 58 138);
+}
+
+.dark .bg-slate-100,
+.dark .bg-gray-100 {
+  background-color: rgb(30 41 59);
+}
+
+.dark .bg-slate-200 {
+  background-color: rgb(51 65 85);
+}
+
+.dark .bg-gray-50\/70 {
+  background-color: rgb(15 23 42 / 0.7);
+}
+
+.dark .bg-gray-50\/60,
+.dark .bg-slate-50\/60 {
+  background-color: rgb(15 23 42 / 0.6);
+}
+
+.dark .bg-gray-50\/50,
+.dark .bg-slate-50\/50 {
+  background-color: rgb(15 23 42 / 0.5);
+}
+
+.dark .bg-gray-50\/90,
+.dark .bg-slate-50\/90 {
+  background-color: rgb(15 23 42 / 0.9);
+}
+
+.dark .bg-white\/90 {
+  background-color: rgb(15 23 42 / 0.9);
+}
+
+.dark .bg-white\/80 {
+  background-color: rgb(15 23 42 / 0.8);
+}
+
+.dark .bg-white\/20 {
+  background-color: rgb(255 255 255 / 0.12);
+}
+
+.dark .bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.08);
+}
+
+.dark .bg-blue-50 {
+  background-color: rgb(30 41 59);
+}
+
+.dark .from-white,
+.dark .from-gray-50,
+.dark .from-slate-50 {
+  --tw-gradient-from: rgb(30 41 59);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), var(--tw-gradient-to, rgb(30 41 59 / 0));
+}
+
+.dark .from-gray-100 {
+  --tw-gradient-from: rgb(30 41 59);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), var(--tw-gradient-to, rgb(30 41 59 / 0));
+}
+
+.dark .from-blue-50 {
+  --tw-gradient-from: rgb(30 58 138);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), var(--tw-gradient-to, rgb(30 58 138 / 0));
+}
+
+.dark .from-indigo-50 {
+  --tw-gradient-from: rgb(67 56 202);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), var(--tw-gradient-to, rgb(67 56 202 / 0));
+}
+
+.dark .via-white,
+.dark .via-gray-50,
+.dark .via-slate-50 {
+  --tw-gradient-stops:
+    var(--tw-gradient-from), rgb(30 41 59),
+    var(--tw-gradient-to, rgb(30 41 59 / 0));
+}
+
+.dark .via-blue-50 {
+  --tw-gradient-stops:
+    var(--tw-gradient-from), rgb(30 58 138),
+    var(--tw-gradient-to, rgb(30 58 138 / 0));
+}
+
+.dark .via-indigo-50 {
+  --tw-gradient-stops:
+    var(--tw-gradient-from), rgb(67 56 202),
+    var(--tw-gradient-to, rgb(67 56 202 / 0));
+}
+
+.dark .to-white,
+.dark .to-gray-50,
+.dark .to-slate-50 {
+  --tw-gradient-to: rgb(30 41 59);
+}
+
+.dark .to-gray-100 {
+  --tw-gradient-to: rgb(30 41 59);
+}
+
+.dark .to-purple-50 {
+  --tw-gradient-to: rgb(168 85 247);
+}
+
+.dark .text-gray-400 {
+  color: rgb(148 163 184);
+}
+
+.dark .text-gray-900 {
+  color: rgb(243 244 246);
+}
+
+.dark .border-gray-100 {
+  border-color: rgb(51 65 85);
+}
+
+.dark .border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: rgb(30 41 59);
+}
+
+.dark .hover\:bg-slate-50:hover {
+  background-color: rgb(30 41 59);
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: rgb(51 65 85);
+}
+
+.dark .hover\:bg-white:hover {
+  background-color: rgb(31 41 55);
+}
+
+/* Expanded dark mode coverage for additional utility classes */
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700,
+.dark .text-slate-600,
+.dark .text-slate-500,
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700 {
+  color: rgb(241 245 249);
+}
+
+.dark .text-gray-600,
+.dark .text-gray-500,
+.dark .text-gray-400 {
+  color: rgb(148 163 184);
+}
+
+.dark .hover\:text-gray-700:hover,
+.dark .hover\:text-gray-600:hover,
+.dark .hover\:text-gray-500:hover {
+  color: rgb(241 245 249);
+}
+
+.dark .bg-green-50 {
+  background-color: rgb(22 101 52 / 0.15);
+}
+
+.dark .bg-red-50 {
+  background-color: rgb(122 34 37 / 0.18);
+}
+
+.dark .bg-purple-50 {
+  background-color: rgb(79 70 229 / 0.16);
+}
+
+.dark .bg-amber-50 {
+  background-color: rgb(181 83 0 / 0.14);
+}
+
+.dark .bg-indigo-50 {
+  background-color: rgb(88 28 135 / 0.16);
+}
+
+.dark .bg-blue-100 {
+  background-color: rgb(30 58 138 / 0.18);
+}
+
+.dark .bg-slate-300 {
+  background-color: rgb(71 85 105);
+}
+
+.dark .bg-slate-400 {
+  background-color: rgb(100 116 139);
+}
+
+.dark .bg-white\/25 {
+  background-color: rgb(255 255 255 / 0.15);
+}
+
+.dark .bg-white\/40 {
+  background-color: rgb(255 255 255 / 0.18);
+}
+
+.dark .bg-white\/60 {
+  background-color: rgb(255 255 255 / 0.22);
+}
+
+.dark .border-blue-100 {
+  border-color: rgb(59 130 246);
+}
+
+.dark .border-green-200 {
+  border-color: rgb(22 163 74);
+}
+
+.dark .border-purple-200 {
+  border-color: rgb(168 85 247);
+}
+
+.dark .border-red-200 {
+  border-color: rgb(239 68 68);
+}
+
+.dark .border-indigo-200 {
+  border-color: rgb(129 140 248);
+}
+
+.dark .border-amber-200 {
+  border-color: rgb(245 158 11);
+}
+
+.dark .focus\:border-blue-400:focus {
+  border-color: rgb(96 165 250);
+}
+
+.dark .hover\:bg-green-50:hover {
+  background-color: rgb(22 101 52 / 0.22);
+}
+
+.dark .hover\:bg-red-50:hover {
+  background-color: rgb(122 34 37 / 0.24);
+}
+
+.dark .hover\:bg-purple-50:hover {
+  background-color: rgb(79 70 229 / 0.24);
+}
+
+.dark .hover\:bg-blue-50:hover {
+  background-color: rgb(30 58 138 / 0.2);
+}
+
+.dark .hover\:bg-indigo-50:hover {
+  background-color: rgb(88 28 135 / 0.2);
+}
+
+.dark .hover\:bg-amber-50:hover {
+  background-color: rgb(181 83 0 / 0.2);
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: rgb(71 85 105);
+}
+
+.dark .hover\:bg-gray-50\/70:hover {
+  background-color: rgb(15 23 42 / 0.7);
+}
+
+.dark .bg-blue-100\/80 {
+  background-color: rgb(30 58 138 / 0.6);
+}
+
+.dark .bg-green-100\/80 {
+  background-color: rgb(22 163 74 / 0.6);
+}
+
+.dark .bg-orange-100\/80 {
+  background-color: rgb(251 146 60 / 0.6);
+}
+
+.dark .bg-slate-50\/70 {
+  background-color: rgb(15 23 42 / 0.7);
+}
+
+.dark .bg-slate-50\/60 {
+  background-color: rgb(15 23 42 / 0.6);
+}
+
+.dark .bg-slate-50\/50 {
+  background-color: rgb(15 23 42 / 0.5);
+}
+
+.dark .bg-blue-50\/30 {
+  background-color: rgb(30 58 138 / 0.2);
+}
+
+.dark .bg-red-50\/80 {
+  background-color: rgb(122 34 37 / 0.24);
+}
+
+.dark .bg-white\/60 {
+  background-color: rgb(15 23 42 / 0.75);
+}
+
+.dark .bg-blue-50\/40 {
+  background-color: rgb(30 58 138 / 0.18);
+}
+
+.dark .hover\:bg-blue-50\/30:hover {
+  background-color: rgb(30 58 138 / 0.2);
+}
+
+.dark .hover\:bg-purple-50\/30:hover {
+  background-color: rgb(79 70 229 / 0.22);
+}
+
+.dark .hover\:bg-orange-50\/30:hover {
+  background-color: rgb(181 83 0 / 0.22);
+}
+.dark .bg-white\/95 {
+  background-color: rgb(31 41 55 / 0.95);
+}
+
+.dark .border-slate-200\/60 {
+  border-color: rgb(71 85 105 / 0.6);
+}
+
+/* Dark mode - cacher le logo en mode sombre */
+.dark img[alt="Logo"] {
+  display: none;
+}
+
+/* Dark mode - hover menu items (écrase le gradient bleu clair) */
+.dark .hover\:bg-linear-to-r:hover,
+.dark .hover\:from-blue-50:hover,
+.dark .hover\:to-blue-100:hover {
+  background-image: none !important;
+  background-color: rgb(51 65 85) !important;
+}
+
+.dark .hover\:text-blue-600:hover {
+  color: rgb(96 165 250);
+}
+
+/* Badge Administrateur */
+.dark .border-blue-200 {
+  border-color: rgb(59 130 246 / 0.4);
+}
+.dark .bg-blue-50\/50 {
+  background-color: rgb(30 58 138 / 0.25);
+}
+
+/* Header du dashboard - halos et fond */
+.dark .from-white {
+  --tw-gradient-from: rgb(15 23 42);
+}
+.dark .via-slate-50 {
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(20 30 48), var(--tw-gradient-to, rgb(20 30 48 / 0));
+}
+.dark .to-blue-50 {
+  --tw-gradient-to: rgb(23 37 84);
+}
+.dark .bg-blue-100\/40 {
+  background-color: rgb(30 58 138 / 0.15);
+}
+.dark .bg-indigo-100\/30 {
+  background-color: rgb(67 56 202 / 0.1);
+}
+
+/* Widget date */
+.dark .bg-white\/90 {
+  background-color: rgb(31 41 55 / 0.9);
+}
+
+/* Barre d'outils et cartes graphiques */
+.dark .bg-gray-200 {
+  background-color: rgb(55 65 81);
+}
+
+/* Graphiques Recharts en dark */
+.dark .recharts-cartesian-grid line {
+  stroke: rgb(55 65 81);
+}
+.dark .recharts-text {
+  fill: rgb(148 163 184);
+}
+.dark .recharts-tooltip-wrapper .recharts-default-tooltip {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(55 65 81) !important;
+  color: rgb(241 245 249) !important;
+}
+
+/* Couleurs pastelles graphique - remplacement par versions dark */
+.dark .recharts-area-area {
+  opacity: 0.4;
+}
+
+/* ========================================
+   StatCard
+   ======================================== */
+
+/* Fond et bordure de la carte */
+.dark .rounded-2xl.bg-white.border-gray-100 {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+
+/* Icône backgrounds (les couleurs passées via prop `color`) */
+.dark .bg-blue-100 { background-color: rgb(30 58 138 / 0.35); }
+.dark .bg-green-100 { background-color: rgb(20 83 45 / 0.35); }
+.dark .bg-purple-100 { background-color: rgb(88 28 135 / 0.35); }
+.dark .bg-orange-100 { background-color: rgb(124 45 18 / 0.35); }
+.dark .bg-red-100 { background-color: rgb(127 29 29 / 0.35); }
+.dark .bg-amber-100 { background-color: rgb(120 53 15 / 0.35); }
+
+/* ========================================
+   DashboardGrid - barre d'outils
+   ======================================== */
+
+/* Barre principale */
+.dark .border-gray-200.bg-white.shadow-sm {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+
+/* Bouton Personnaliser (inactif) */
+.dark .border-gray-200.bg-white.text-gray-700 {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+  color: rgb(209 213 219);
+}
+.dark .border-gray-200.bg-white.text-gray-700:hover {
+  background-color: rgb(55 65 81);
+}
+
+/* Menu ajout widget dropdown */
+.dark .border-gray-200.bg-white.shadow-xl {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+.dark .border-gray-100.p-3:hover {
+  background-color: rgb(51 65 85);
+  border-color: rgb(59 130 246 / 0.4);
+}
+
+/* Message aucun widget */
+.dark .bg-gray-100.rounded-full {
+  background-color: rgb(55 65 81);
+}
+
+/* ========================================
+   KPICardsWidget - backgrounds totaux,
+   période, moyenne mensuelle
+   ======================================== */
+.dark .bg-blue-50 {
+  background-color: rgb(23 37 84 / 0.4);
+}
+.dark .bg-green-50 {
+  background-color: rgb(20 83 45 / 0.25);
+}
+.dark .bg-purple-50 {
+  background-color: rgb(59 7 100 / 0.3);
+}
+.dark .bg-amber-50 {
+  background-color: rgb(120 53 15 / 0.25);
+}
+
+/* ========================================
+   Badge Administrateur (Dashboard.tsx)
+   ======================================== */
+.dark .border-blue-200.bg-blue-50\/50 {
+  background-color: rgb(30 58 138 / 0.2);
+  border-color: rgb(59 130 246 / 0.35);
+}
+.dark .text-blue-600 {
+  color: rgb(96 165 250);
+}
+.dark .bg-blue-400 {
+  background-color: rgb(96 165 250);
+}
+
+/* ========================================
+   UpcomingDeadlinesWidget - dates
+   ======================================== */
+.dark .text-orange-600 { color: rgb(251 146 60); }
+.dark .text-red-600 { color: rgb(248 113 113); }
+.dark .bg-orange-50 { background-color: rgb(124 45 18 / 0.2); }
+.dark .bg-red-50 { background-color: rgb(127 29 29 / 0.2); }
+.dark .border-orange-200 { border-color: rgb(194 65 12 / 0.5); }
+.dark .border-red-200 { border-color: rgb(185 28 28 / 0.5); }
+
+/* ========================================
+   RecentClientsWidget - statuts
+   ======================================== */
+.dark .bg-green-100.text-green-800 {
+  background-color: rgb(20 83 45 / 0.3);
+  color: rgb(134 239 172);
+}
+.dark .bg-gray-100.text-gray-600 {
+  background-color: rgb(55 65 81);
+  color: rgb(156 163 175);
+}
+.dark .bg-yellow-100.text-yellow-800 {
+  background-color: rgb(120 53 15 / 0.3);
+  color: rgb(253 224 71);
+}
+
+/* ========================================
+   Graphique Évolution Mensuelle - pastels
+   ======================================== */
+.dark .recharts-area path[fill="#93bbfc"] { fill: rgb(37 99 235 / 0.5); }
+.dark .recharts-area path[fill="#86efac"] { fill: rgb(22 163 74 / 0.5); }
+.dark .recharts-area path[fill="#fcd34d"] { fill: rgb(217 119 6 / 0.5); }
+
+.dark .recharts-cartesian-grid line { stroke: rgb(55 65 81); }
+.dark .recharts-text { fill: rgb(148 163 184) !important; }
+.dark .recharts-legend-item-text { color: rgb(148 163 184) !important; }
+.dark .recharts-default-tooltip {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(55 65 81) !important;
+  color: rgb(241 245 249) !important;
+}
+
+/* RevenueChartWidget - Total période */
+.dark .bg-green-50 {
+  background-color: rgb(20 83 45 / 0.25);
+}
+.dark .text-green-700 {
+  color: rgb(134 239 172);
+}
+.dark .text-green-900 {
+  color: rgb(187 247 208);
+}
+
+/* RevenueChartWidget - Moyenne mensuelle */
+.dark .text-blue-700 {
+  color: rgb(147 197 253);
+}
+.dark .text-blue-900 {
+  color: rgb(191 219 254);
+}
+
+/* ========================================
+   HEADER - boutons CSV/PDF/Nouveau Client
+   ======================================== */
+.dark .border-blue-200.bg-white {
+  background-color: rgb(31 41 55);
+  border-color: rgb(59 130 246 / 0.4);
+}
+.dark .border-blue-200.bg-white:hover {
+  background-color: rgb(30 58 138 / 0.2);
+}
+
+/* Badge "Annuaire clients" */
+.dark .border-blue-200.bg-white\/80 {
+  background-color: rgb(30 58 138 / 0.2);
+  border-color: rgb(59 130 246 / 0.35);
+}
+
+/* ========================================
+   STATS CARDS
+   ======================================== */
+.dark .rounded-3xl.border-gray-200.bg-white {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+
+/* ========================================
+   BARRE RECHERCHE + FILTRES
+   ======================================== */
+
+/* Input recherche */
+.dark input[type="text"].rounded-2xl,
+.dark input[type="email"].rounded-2xl,
+.dark input[type="tel"].rounded-2xl,
+.dark textarea.rounded-2xl {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+  color: rgb(241 245 249);
+}
+.dark input[type="text"].rounded-2xl::placeholder,
+.dark input[type="email"].rounded-2xl::placeholder,
+.dark input[type="tel"].rounded-2xl::placeholder,
+.dark textarea.rounded-2xl::placeholder {
+  color: rgb(100 116 139);
+}
+.dark input[type="text"].rounded-2xl:focus,
+.dark input[type="email"].rounded-2xl:focus,
+.dark textarea.rounded-2xl:focus {
+  background-color: rgb(31 41 55);
+  border-color: rgb(59 130 246);
+}
+
+/* Bouton filtre statut et utilisateur */
+.dark .border-gray-200.bg-white.text-gray-700.rounded-2xl {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+  color: rgb(209 213 219);
+}
+.dark .border-gray-200.bg-white.text-gray-700.rounded-2xl:hover {
+  background-color: rgb(51 65 85);
+}
+
+/* Dropdown filtres */
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl button {
+  color: rgb(209 213 219);
+}
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl button:hover {
+  background-color: rgb(51 65 85);
+}
+.dark .bg-blue-50.text-blue-700 {
+  background-color: rgb(30 58 138 / 0.3);
+  color: rgb(147 197 253);
+}
+
+/* ========================================
+   CASES À COCHER
+   ======================================== */
+.dark input[type="checkbox"] {
+  background-color: rgb(51 65 85);
+  border-color: rgb(100 116 139);
+  accent-color: rgb(59 130 246);
+}
+
+/* ========================================
+   TABLE
+   ======================================== */
+.dark .overflow-hidden.rounded-3xl.border-gray-100.bg-white {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+
+/* Header tableau */
+.dark .bg-gray-50\/70 {
+  background-color: rgb(15 23 42 / 0.7);
+}
+
+/* Lignes */
+.dark tbody tr {
+  border-color: rgb(51 65 85);
+}
+.dark tbody tr:hover {
+  background-color: rgb(30 58 138 / 0.1) !important;
+}
+.dark tbody tr.bg-blue-50 {
+  background-color: rgb(30 58 138 / 0.2) !important;
+}
+
+/* Avatar initiale */
+.dark .bg-gray-100.font-bold.uppercase {
+  background-color: rgb(51 65 85);
+  color: rgb(203 213 225);
+}
+
+/* Compteurs projets/rdv */
+.dark .bg-gray-50.rounded-xl {
+  background-color: rgb(51 65 85);
+  color: rgb(203 213 225);
+}
+.dark .bg-blue-50.rounded-xl {
+  background-color: rgb(30 58 138 / 0.25);
+  color: rgb(147 197 253);
+}
+
+/* ========================================
+   BADGES STATUT CLIENT
+   ======================================== */
+.dark .bg-green-100.text-green-700 {
+  background-color: rgb(20 83 45 / 0.35);
+  color: rgb(134 239 172);
+}
+.dark .bg-gray-100.text-gray-500 {
+  background-color: rgb(55 65 81);
+  color: rgb(156 163 175);
+}
+.dark .bg-blue-100.text-blue-700 {
+  background-color: rgb(30 58 138 / 0.35);
+  color: rgb(147 197 253);
+}
+
+/* Badge "Ancien" - orange, plus lisible */
+.dark .bg-orange-100.text-orange-700 {
+  background-color: rgb(154 52 18 / 0.35);
+  color: rgb(253 186 116);
+}
+
+/* ========================================
+   DRAWER DÉTAILS CLIENT
+   ======================================== */
+
+/* Fond principal */
+.dark .bg-white.shadow-2xl.rounded-3xl {
+  background-color: rgb(31 41 55);
+}
+
+/* Header drawer */
+.dark .border-b.border-gray-100.bg-white.p-6 {
+  background-color: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+
+/* Bouton fermer */
+.dark .hover\:bg-gray-100 {
+  color: rgb(148 163 184);
+}
+.dark .hover\:bg-gray-100:hover {
+  background-color: rgb(51 65 85);
+}
+
+/* Stats projets/rdv dans drawer */
+.dark .rounded-2xl.bg-blue-50.p-4 {
+  background-color: rgb(30 58 138 / 0.25);
+}
+.dark .rounded-2xl.bg-purple-50.p-4 {
+  background-color: rgb(88 28 135 / 0.25);
+}
+.dark .text-purple-600 { color: rgb(196 181 253); }
+.dark .text-purple-700 { color: rgb(216 180 254); }
+
+/* Bloc coordonnées */
+.dark .rounded-3xl.bg-gray-50.p-5 {
+  background-color: rgb(15 23 42 / 0.5);
+}
+
+/* Bloc notes */
+.dark .rounded-3xl.bg-blue-50.p-5 {
+  background-color: rgb(23 37 84 / 0.35);
+}
+.dark .rounded-3xl.bg-blue-50.p-5 h4 {
+  color: rgb(147 197 253);
+}
+.dark .text-blue-800 {
+  color: rgb(191 219 254);
+}
+
+/* Boutons éditer/supprimer dans drawer */
+.dark .border-gray-200.py-3\.5.text-gray-600 {
+  border-color: rgb(55 65 81);
+  color: rgb(203 213 225);
+}
+.dark .border-gray-200.py-3\.5.text-gray-600:hover {
+  background-color: rgb(51 65 85);
+}
+.dark .bg-red-50.py-3\.5.text-red-600 {
+  background-color: rgb(127 29 29 / 0.2);
+}
+.dark .bg-red-50.py-3\.5.text-red-600:hover {
+  background-color: rgb(127 29 29 / 0.35);
+}
+
+/* Message non autorisé */
+.dark .col-span-2.rounded-2xl.bg-gray-50.border-gray-200 {
+  background-color: rgb(51 65 85);
+  border-color: rgb(71 85 105);
+  color: rgb(148 163 184);
+}
+
+/* ========================================
+   MODALES (confirmation, non autorisé)
+   ======================================== */
+.dark .rounded-2xl.bg-white.p-6.shadow-xl,
+.dark .rounded-2xl.bg-white.p-6.shadow-xl h2 {
+  background-color: rgb(31 41 55);
+  color: rgb(241 245 249);
+}
+.dark .rounded-2xl.bg-white.p-6.shadow-xl p {
+  color: rgb(148 163 184);
+}
+.dark .rounded-xl.bg-gray-100.text-gray-600 {
+  background-color: rgb(51 65 85);
+  color: rgb(203 213 225);
+}
+.dark .rounded-xl.bg-gray-100.text-gray-600:hover {
+  background-color: rgb(71 85 105);
+}
+
+/* ========================================
+   FORMULAIRE MODAL
+   ======================================== */
+.dark input.bg-gray-50,
+.dark select.bg-gray-50,
+.dark textarea.bg-gray-50 {
+  background-color: rgb(51 65 85);
+  border-color: rgb(71 85 105);
+  color: rgb(241 245 249);
+}
+.dark input.bg-gray-50:focus,
+.dark select.bg-gray-50:focus,
+.dark textarea.bg-gray-50:focus {
+  background-color: rgb(51 65 85);
+  border-color: rgb(59 130 246);
+}
+.dark select.bg-gray-50 option {
+  background-color: rgb(31 41 55);
+  color: rgb(241 245 249);
+}
+.dark .bg-blue-50.border-blue-100.rounded-xl {
+  background-color: rgb(23 37 84 / 0.3);
+  border-color: rgb(59 130 246 / 0.3);
+  color: rgb(147 197 253);
+}
+.dark .bg-red-50.border-red-300 {
+  background-color: rgb(127 29 29 / 0.2);
+  border-color: rgb(185 28 28 / 0.5);
+}
+.dark .rounded-2xl.bg-gray-100.text-gray-500 {
+  background-color: rgb(51 65 85);
+  color: rgb(148 163 184);
+}
+.dark .rounded-2xl.bg-gray-100.text-gray-500:hover {
+  background-color: rgb(71 85 105);
+}
+
+/* ========================================
+   INDICATEURS FILTRES ACTIFS
+   ======================================== */
+.dark .bg-blue-100.text-blue-700.rounded-full {
+  background-color: rgb(30 58 138 / 0.35);
+  color: rgb(147 197 253);
+}
+.dark .bg-purple-100.text-purple-700.rounded-full {
+  background-color: rgb(88 28 135 / 0.35);
+  color: rgb(216 180 254);
+}
+
+/* Avatar utilisateur filtre admin */
+.dark .bg-purple-100.text-purple-600 {
+  background-color: rgb(88 28 135 / 0.35);
+  color: rgb(216 180 254);
+}
+
+/* Dropdown filtre statut - texte des options */
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl button.text-gray-700,
+.dark .border-gray-200.bg-white.p-1.shadow-xl button {
+  color: rgb(209 213 219) !important;
+}
+
+/* Option active dans le dropdown (bg-blue-50 text-blue-700) */
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl button.bg-blue-50 {
+  background-color: rgb(30 58 138 / 0.3) !important;
+  color: rgb(147 197 253) !important;
+}
+
+/* Dropdown filtre utilisateur admin */
+.dark .border-gray-200.bg-white.p-1.shadow-xl.rounded-2xl button {
+  color: rgb(209 213 219) !important;
+}
+
+/* ========================================
+   FILTRES STATUT - Dark Mode
+   ======================================== */
+
+/* Bouton principal du filtre */
+.dark .border-gray-200.bg-white.text-gray-700.rounded-2xl span {
+  color: rgb(229 231 235) !important;
+}
+
+/* Dropdown du filtre statut */
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl button {
+  color: rgb(229 231 235) !important;
+}
+
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl button:hover {
+  background-color: rgb(51 65 85) !important;
+}
+
+/* Option sélectionnée (bg-blue-50 text-blue-700) */
+.dark .bg-blue-50.text-blue-700 {
+  background-color: rgb(30 58 138) !important;
+  color: rgb(191 219 254) !important;
+}
+
+/* Option "Tous" et autres non sélectionnées */
+.dark .border-gray-200.bg-white.shadow-xl.rounded-2xl button.text-gray-700 {
+  color: rgb(229 231 235) !important;
+}
+
+/* ========================================
+   BOUTON NOUVEAU CLIENT
+   ======================================== */
+
+.dark .bg-blue-600.text-white {
+  background-color: rgb(37 99 235) !important;
+  box-shadow: 0 10px 15px -3px rgb(59 130 246 / 0.3) !important;
+}
+
+.dark .bg-blue-600:hover {
+  background-color: rgb(29 78 216) !important;
+}
+
+.dark .shadow-blue-100 {
+  box-shadow: 0 10px 15px -3px rgb(59 130 246 / 0.25) !important;
+}
+/* Meilleur contraste général pour les boutons filtres */
+.dark button.border-gray-200.bg-white {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(75 85 99) !important;
+  color: rgb(229 231 235) !important;
+}
+
+.dark button.border-gray-200.bg-white:hover {
+  background-color: rgb(55 65 81) !important;
+}
+/* Bouton Supprimer - version très visible */
+.dark .bg-red-50.py-3\.5.text-red-600 {
+  background-color: rgb(185 28 28) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.dark .bg-red-50.py-3\.5.text-red-600:hover {
+  background-color: rgb(220 38 38) !important;
+}
+
+/* ========================================
+   HEADER PIPELINE - Dark Mode
+   ======================================== */
+
+.dark .bg-linear-to-br.from-blue-600.via-indigo-600.to-violet-600 {
+  background: linear-gradient(to bottom right, 
+    rgb(30 58 138), 
+    rgb(55 48 163), 
+    rgb(91 33 182)) !important;
+  border-color: rgb(59 130 246 / 0.3) !important;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.4), 
+              0 8px 10px -6px rgb(0 0 0 / 0.4) !important;
+}
+
+/* Texte et éléments à l'intérieur du header */
+.dark .text-white {
+  color: rgb(241 245 249) !important;
+}
+
+.dark .text-blue-100 {
+  color: rgb(191 219 254) !important;
+}
+
+.dark .border-white\/10 {
+  border-color: rgb(255 255 255 / 0.15) !important;
+}
+
+.dark .bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.08) !important;
+}
+
+/* Amélioration des petits badges dans le header */
+.dark .border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2) !important;
+  background-color: rgb(255 255 255 / 0.07) !important;
+}
+
+/* Bouton "Nouveau Deal" en dark mode */
+.dark .bg-white.text-indigo-700 {
+  background-color: rgb(224 231 255) !important;
+  color: rgb(30 64 175) !important;
+}
+
+.dark .bg-white.text-indigo-700:hover {
+  background-color: rgb(199 210 254) !important;
+}
+
+/* ========================================
+   BOUTON NOUVEAU CLIENT - Dark Mode (plus cohérent)
+   ======================================== */
+
+.dark .bg-blue-600.text-white.shadow-lg.shadow-blue-100 {
+  background-color: rgb(29 78 216) !important;     /* Bleu plus profond */
+  color: white !important;
+  box-shadow: 0 10px 15px -3px rgb(30 64 175 / 0.4),
+              0 4px 6px -4px rgb(30 64 175 / 0.3) !important;
+}
+
+.dark .bg-blue-600.text-white.shadow-lg.shadow-blue-100:hover {
+  background-color: rgb(30 64 175) !important;     /* Hover plus foncé */
+  transform: translateY(-2px);
+}
+
+.dark .bg-blue-600.text-white.shadow-lg.shadow-blue-100:active {
+  transform: scale(0.97);
+}
+
+/* ========================================
+   BOUTON "MES DEALS" - Dark Mode
+   ======================================== */
+
+
+
+.dark .border-blue-500.bg-blue-600.text-white:hover {
+  background-color: rgb(30 64 175) !important;
+}
+
+
+
+.dark .border-blue-500.bg-blue-600.text-white:hover {
+  background: linear-gradient(to right, rgb(29 78 216), rgb(55 48 163)) !important;
+}
+
+/* ========================================
+   BOUTONS VUE CALENDRIER / LISTE + FILTRES BLEUS
+   ======================================== */
+
+.dark .bg-blue-600.text-white {
+  background-color: rgb(29 78 216) !important;
+  color: white !important;
+}
+
+.dark .bg-blue-600.text-white:hover {
+  background-color: rgb(30 64 175) !important;
+}
+
+/* Bouton "Mes rendez-vous" actif */
+.dark .border-blue-500.bg-blue-600.text-white {
+  background-color: rgb(29 78 216) !important;
+  border-color: rgb(59 130 246) !important;
+}
+
+.dark .border-blue-500.bg-blue-600.text-white:hover {
+  background-color: rgb(30 64 175) !important;
+}
+/* ========================================
+   COULEURS ÉVÉNEMENTS - Dark Mode (plus doux)
+   ======================================== */
+
+/* Appel (orange trop vif) */
+.dark .bg-orange-50.text-orange-700 {
+  background-color: rgb(124 45 18 / 0.35) !important;
+  color: rgb(253 186 116) !important;
+  border-color: rgb(194 65 12 / 0.4) !important;
+}
+
+.dark .bg-orange-100 {
+  background-color: rgb(154 52 18 / 0.35) !important;
+}
+
+/* Statut Annulé (rouge trop violent) */
+.dark .bg-red-100.text-red-700 {
+  background-color: rgb(127 29 29 / 0.45) !important;
+  color: rgb(254 226 226) !important;
+  border-color: rgb(185 28 28 / 0.5) !important;
+}
+
+/* Amélioration des cartes événement en vue liste */
+.dark .border-l-4.border-orange-500 {
+  border-color: rgb(234 88 12) !important;
+}
+
+.dark .border-l-4.border-red-500 {
+  border-color: rgb(220 38 38) !important;
+}
+/* ========================================
+   HOVER LISTE ÉVÉNEMENTS (Agenda) - Dark Mode
+   ======================================== */
+
+.dark .hover\:bg-slate-50\/50:hover {
+  background-color: rgb(30 58 138 / 0.25) !important;   /* Bleu doux visible */
+}
+
+.dark .group:hover {
+  background-color: rgb(30 58 138 / 0.18) !important;
+}
+
+/* Meilleur contraste pour les lignes de la liste */
+.dark .divide-slate-100 > div:hover {
+  background-color: rgb(55 65 81) !important;   /* Gris foncé + bleu léger */
+  border-color: rgb(59 130 246 / 0.3) !important;
+}
+/* ========================================
+   DROPDOWNS FILTRES LISTE - Texte en blanc (Dark Mode)
+   ======================================== */
+
+/* Texte des options dans les selects */
+.dark select option,
+.dark select {
+  color: rgb(241 245 249) !important;   /* Blanc / gris très clair */
+  background-color: rgb(31 41 55) !important;
+}
+
+/* Correction spécifique pour les textes "Tous les types", "Tous les statuts", etc. */
+.dark .border-slate-200.bg-slate-50 {
+  color: rgb(241 245 249) !important;
+}
+
+/* Placeholder et texte par défaut des selects */
+.dark select option[value="all"],
+.dark select option[value="upcoming"] {
+  color: rgb(229 231 235) !important;
+}
+
+/* Amélioration globale des selects en dark mode */
+.dark select:focus {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(59 130 246) !important;
+  color: rgb(241 245 249) !important;
+}
+/* ========================================
+   BARRE DE RECHERCHE - "Rechercher un événement"
+   ======================================== */
+
+.dark .border-slate-200.bg-white {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(75 85 99) !important;
+  color: rgb(241 245 249) !important;
+}
+
+/* Placeholder plus visible */
+.dark input[placeholder="Rechercher un événement..."]::placeholder,
+.dark input[placeholder*="Rechercher"]::placeholder {
+  color: rgb(148 163 184) !important;   /* Gris clair visible */
+}
+
+/* Focus state amélioré */
+.dark input[placeholder*="Rechercher"]:focus {
+  border-color: rgb(59 130 246) !important;
+  background-color: rgb(31 41 55) !important;
+  color: rgb(241 245 249) !important;
+  box-shadow: 0 0 0 4px rgb(59 130 246 / 0.15) !important;
+}
+/* ========================================
+   STATUT "EN COURS" - Version plus cohérente Dark Mode
+   ======================================== */
+
+/* Version douce et cohérente (bleu-vert moderne) */
+.dark .bg-emerald-100.text-emerald-700 {
+  background-color: rgb(23 94 70 / 0.45) !important;
+  color: rgb(134 239 172) !important;
+  border-color: rgb(52 211 153 / 0.5) !important;
+}
+
+/* Pour les badges dans la liste et le calendrier */
+.dark .border-emerald-200 {
+  border-color: rgb(52 211 153 / 0.4) !important;
+}
+
+/* Hover et accent */
+.dark .bg-emerald-100\/80 {
+  background-color: rgb(23 94 70 / 0.55) !important;
+}
+/* ========================================
+   BOUTONS BLEUS ACTIFS (consolidé & amélioré)
+   ======================================== */
+
+/* Boutons principaux : Nouveau Client, Mes rendez-vous, Vue Calendrier, etc. */
+.dark .bg-blue-600.text-white,
+.dark .border-blue-500.bg-blue-600.text-white {
+  background-color: rgb(29 78 216) !important;     /* Bleu profond */
+  border-color: rgb(59 130 246 / 0.6) !important;
+  color: white !important;
+  box-shadow: 0 4px 6px -1px rgb(59 130 246 / 0.3),
+              0 2px 4px -2px rgb(59 130 246 / 0.2) !important;
+}
+
+.dark .bg-blue-600.text-white:hover,
+.dark .border-blue-500.bg-blue-600.text-white:hover {
+  background-color: rgb(23 63 178) !important;
+  box-shadow: 0 10px 15px -3px rgb(59 130 246 / 0.35) !important;
+}
+
+/* Version pour les boutons de vue (Calendrier / Liste) */
+.dark .flex.items-center.gap-1.rounded-2xl .bg-blue-600 {
+  background-color: rgb(29 78 216) !important;
+}
+
+/* Option active dans les dropdowns */
+.dark .bg-blue-50.text-blue-700 {
+  background-color: rgb(30 58 138 / 0.45) !important;
+  color: rgb(191 219 254) !important;
+}
+
+/* ========================================
+   BOUTON "VOIR DÉTAILS" - Bleu Violet plus élégant (comme le header)
+   ======================================== */
+
+.dark .bg-blue-600.text-white {
+  background: linear-gradient(to right, rgb(37 99 235), rgb(67 56 202)) !important;
+  color: white !important;
+  box-shadow: 0 10px 15px -3px rgb(67 56 202 / 0.35) !important;
+}
+
+.dark .bg-blue-600.text-white:hover {
+  background: linear-gradient(to right, rgb(29 78 216), rgb(55 48 163)) !important;
+  box-shadow: 0 10px 15px -3px rgb(67 56 202 / 0.45) !important;
+}
+
+/* ========================================
+   DATES "FIN" + Labels de dates en dark mode
+   ======================================== */
+
+.dark .text-gray-700,
+.dark .text-gray-800 {
+  color: rgb(241 245 249) !important;
+}
+
+/* Spécifique pour les dates de fin */
+.dark .text-sm.font-semibold.text-gray-700,
+.dark .text-sm.font-semibold.text-gray-800 {
+  color: rgb(224 231 255) !important;   /* Bleu très clair */
+}
+
+/* Amélioration générale des textes dans les cartes */
+.dark .rounded-3xl.border-gray-200.bg-white .text-gray-700 {
+  color: rgb(241 245 249) !important;
+}
+
+/* ========================================
+   PRIORITÉ "MOYENNE" - Version plus cohérente
+   ======================================== */
+
+.dark .bg-yellow-100.text-yellow-700 {
+  background-color: rgb(161 98 7 / 0.45) !important;   /* Orange foncé / ambré doux */
+  color: rgb(253 224 71) !important;
+  border-color: rgb(234 179 8 / 0.5) !important;
+}
+
+/* Pour les badges dans les cartes projets */
+.dark .border-yellow-200 {
+  border-color: rgb(234 179 8 / 0.4) !important;
+}
+
+/* Hover des badges priorité Moyenne */
+.dark .bg-yellow-100\/80 {
+  background-color: rgb(161 98 7 / 0.55) !important;
+}
+/* ========================================
+   STATUT "EN ATTENTE" - Version plus cohérente Dark Mode
+   ======================================== */
+
+/* Badge principal + icône dans les stats */
+.dark .bg-yellow-50.text-yellow-700,
+.dark .bg-yellow-100.text-yellow-700 {
+  background-color: rgb(161 98 7 / 0.45) !important;   /* Ambre doux */
+  color: rgb(253 224 71) !important;
+  border-color: rgb(234 179 8 / 0.5) !important;
+}
+
+/* Pour les petits badges dans les cartes */
+.dark .border-yellow-200 {
+  border-color: rgb(234 179 8 / 0.45) !important;
+}
+
+/* Icône et nombre dans les statistiques */
+.dark .text-yellow-600 {
+  color: rgb(253 224 71) !important;
+}
+
+/* Fond de l'icône dans les stats cards */
+.dark .bg-yellow-50 {
+  background-color: rgb(161 98 7 / 0.25) !important;
+}
+
+/* Hover sur les badges En Attente */
+.dark .bg-yellow-50:hover,
+.dark .bg-yellow-100:hover {
+  background-color: rgb(161 98 7 / 0.55) !important;
+}
+/* ========================================
+   ARCHIVES - Corrections Dark Mode
+   ======================================== */
+
+/* Badge "Meilleurs clients" */
+.dark .bg-amber-50.text-amber-700 {
+  background-color: rgb(161 98 7 / 0.45) !important;
+  color: rgb(253 224 71) !important;
+  border-color: rgb(234 179 8 / 0.4) !important;
+}
+
+/* Icône Projets Terminés */
+.dark .text-emerald-600 {
+  color: rgb(134 239 172) !important;
+}
+
+.dark .bg-emerald-50 {
+  background-color: rgb(22 101 52 / 0.35) !important;
+}
+
+/* Revenu Total Projets */
+.dark .text-violet-600 {
+  color: rgb(192 132 252) !important;
+}
+
+.dark .bg-violet-50 {
+  background-color: rgb(91 33 182 / 0.35) !important;
+}
+
+/* Barre de Performance Mensuelle */
+.dark .bg-linear-to-r.from-blue-500.to-cyan-400 {
+  background: linear-gradient(to right, rgb(59 130 246), rgb(103 232 249)) !important;
+}
+
+.dark .bg-slate-100 {
+  background-color: rgb(51 65 85) !important;
+}
+
+/* Icône Supprimé (Trash) */
+.dark .text-rose-600,
+.dark .text-rose-700 {
+  color: rgb(251 113 133) !important;
+}
+
+.dark .bg-rose-50 {
+  background-color: rgb(127 29 29 / 0.35) !important;
+}
+
+/* Cartes statistiques générales */
+.dark .rounded-3xl.border-slate-200.bg-white {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(55 65 81) !important;
+}
+
+/* ========================================
+   DÉTAIL BUDGET - Vert plus cohérent en Dark Mode
+   ======================================== */
+
+.dark .border-green-100.bg-green-50 {
+  background-color: rgb(22 101 52 / 0.35) !important;
+  border-color: rgb(52 211 153 / 0.4) !important;
+}
+
+.dark .text-green-800 {
+  color: rgb(187 247 208) !important;   /* Vert clair visible */
+}
+
+.dark .text-green-700,
+.dark .text-green-600 {
+  color: rgb(134 239 172) !important;
+}
+
+/* Icône DollarSign dans le détail budget */
+.dark .text-green-600 {
+  color: rgb(134 239 172) !important;
+}
+
+/* ========================================
+   DRAWER DÉTAILS PROJET (Archives) - Description & Budget
+   ======================================== */
+
+/* Description */
+.dark .border-blue-100.bg-blue-50\/70 {
+  background-color: rgb(23 37 84 / 0.45) !important;
+  border-color: rgb(59 130 246 / 0.4) !important;
+}
+
+.dark .text-blue-700 {
+  color: rgb(147 197 253) !important;
+}
+
+.dark .text-slate-700 {
+  color: rgb(224 231 255) !important;
+}
+
+/* Budget */
+.dark .border-emerald-100.bg-emerald-50 {
+  background-color: rgb(22 101 52 / 0.45) !important;
+  border-color: rgb(52 211 153 / 0.4) !important;
+}
+
+.dark .text-emerald-700,
+.dark .text-emerald-800 {
+  color: rgb(134 239 172) !important;
+}
+
+.dark .text-emerald-600 {
+  color: rgb(134 239 172) !important;
+}
+/* Version plus harmonieuse */
+.dark .bg-purple-50 {
+  background-color: rgb(79 70 229 / 0.35) !important;
+}
+
+.dark .text-purple-400 {
+  color: rgb(196 181 253) !important;
+}
+
+.dark .bg-purple-200 {
+  background-color: rgb(129 140 248 / 0.35) !important;
+}
+
+.dark .text-purple-700 {
+  color: rgb(224 231 255) !important;
+}
+/* ========================================
+   SETTINGS PAGE - Corrections prioritaires (fin du fichier)
+   ======================================== */
+
+/* Onglets Profil / Apparence - Hover discret */
+.dark .flex.flex-row.gap-2.rounded-3xl button {
+  transition: all 0.2s ease;
+}
+
+.dark .flex.flex-row.gap-2.rounded-3xl button:hover {
+  background-color: rgb(51 65 85) !important;
+  color: rgb(241 245 249) !important;
+}
+
+.dark .flex.flex-row.gap-2.rounded-3xl .bg-blue-600 {
+  background: linear-gradient(to right, rgb(37 99 235), rgb(67 56 202)) !important;
+  color: white !important;
+}
+
+/* Déconnexion - Rouge plus doux */
+.dark .border-red-200.bg-red-50.text-red-700 {
+  background-color: rgb(127 29 29 / 0.35) !important;
+  color: rgb(254 226 226) !important;
+  border-color: rgb(185 28 28 / 0.45) !important;
+}
+
+.dark .border-red-200.bg-red-50.text-red-700:hover {
+  background-color: rgb(153 27 27 / 0.45) !important;
+}
+
+/* Carte Profil Utilisateur - Moins violet flashy */
+.dark .from-blue-50.via-indigo-50.to-purple-50 {
+  background: linear-gradient(to bottom right, rgb(31 41 55), rgb(23 37 84)) !important;
+}
+
+/* Meilleur contraste texte dans Settings */
+.dark .text-slate-800,
+.dark .text-slate-700 {
+  color: rgb(241 245 249) !important;
+}
+/* ========================================
+   SIDEBAR - Bouton Déconnexion (Dark Mode)
+   ======================================== */
+
+.dark .text-red-500.hover\:text-red-600 {
+  color: rgb(248 113 113) !important;
+}
+
+.dark button.text-red-500:hover,
+.dark button:hover .text-red-500 {
+  color: rgb(254 226 226) !important;
+  background-color: rgb(127 29 29 / 0.35) !important;
+}
+
+/* Version plus douce (recommandée) */
+.dark .text-red-500 {
+  color: rgb(251 113 133) !important;
+}
+
+.dark button.flex.items-center.gap-3.rounded-xl.text-red-500:hover {
+  background-color: rgb(127 29 29 / 0.3) !important;
+  color: rgb(254 226 226) !important;
+}
+
+/* ========================================
+   WIDGET PIPELINE - Taux de conversion
+   ======================================== */
+
+.dark .bg-purple-50 {
+  background-color: rgb(88 28 135 / 0.35) !important;
+  border-color: rgb(168 85 247 / 0.3) !important;
+}
+
+.dark .text-purple-600,
+.dark .text-purple-800 {
+  color: rgb(216 180 254) !important;   /* Violet clair visible */
+}
+
+.dark .text-purple-700 {
+  color: rgb(233 213 255) !important;
+}
+
+/* Version plus sobre */
+.dark .bg-emerald-600.text-white {
+  background-color: rgb(22 101 52) !important;
+  box-shadow: 0 10px 15px -3px rgb(16 185 129 / 0.3) !important;
+}
+
+.dark .bg-emerald-600.text-white:hover {
+  background-color: rgb(16 185 129) !important;
+}
+
+/* ========================================
+   PAGE ACCOUNT (Login / Register) - Dark Mode
+   ======================================== */
+
+/* Fond principal */
+.dark .bg-linear-to-br.from-indigo-50.via-white.to-cyan-50 {
+  background: linear-gradient(to bottom right, rgb(15 23 42), rgb(23 37 84), rgb(30 58 138)) !important;
+}
+
+/* Carte principale */
+.dark .border-white\/40.bg-white\/80 {
+  background-color: rgb(31 41 55 / 0.95) !important;
+  border-color: rgb(71 85 105 / 0.6) !important;
+  backdrop-filter: blur(20px);
+}
+
+/* Inputs */
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="text"] {
+  background-color: rgb(51 65 85) !important;
+  border-color: rgb(71 85 105) !important;
+  color: rgb(241 245 249) !important;
+}
+
+.dark input:focus {
+  border-color: rgb(96 165 250) !important;
+  box-shadow: 0 0 0 4px rgb(59 130 246 / 0.2) !important;
+}
+
+/* Bouton principal (Se connecter / Créer un compte) */
+.dark .bg-linear-to-r.from-indigo-600.to-blue-600 {
+  background: linear-gradient(to right, rgb(37 99 235), rgb(67 56 202)) !important;
+}
+
+.dark .bg-linear-to-r.from-indigo-600.to-blue-600:hover {
+  background: linear-gradient(to right, rgb(29 78 216), rgb(55 48 163)) !important;
+}
+
+/* Bouton Google */
+.dark button.border-gray-200\/50.bg-linear-to-r.from-white.to-gray-50 {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(71 85 105) !important;
+  color: rgb(241 245 249) !important;
+}
+
+.dark button.border-gray-200\/50:hover {
+  background-color: rgb(51 65 85) !important;
+}
+
+/* Switch Login / Register */
+.dark .bg-linear-to-r.from-gray-100.to-gray-200\/50 {
+  background-color: rgb(51 65 85) !important;
+}
+
+.dark button.rounded-xl.py-3 {
+  color: rgb(203 213 225) !important;
+}
+
+.dark button.rounded-xl.py-3.bg-linear-to-r.from-white.to-gray-50 {
+  background: linear-gradient(to right, rgb(37 99 235), rgb(67 56 202)) !important;
+  color: white !important;
+  box-shadow: 0 4px 6px -1px rgb(59 130 246 / 0.3) !important;
+}
+
+/* Messages d'erreur */
+.dark .border-red-200\/50.bg-red-50\/80 {
+  background-color: rgb(127 29 29 / 0.35) !important;
+  border-color: rgb(185 28 28 / 0.5) !important;
+  color: rgb(254 226 226) !important;
+}
+
+/* Texte général */
+.dark .text-slate-800,
+.dark .text-gray-800 {
+  color: rgb(241 245 249) !important;
+}
+
+.dark .text-slate-600,
+.dark .text-gray-600 {
+  color: rgb(203 213 225) !important;
+}
+
+.dark .text-gray-500,
+.dark .text-slate-500 {
+  color: rgb(148 163 184) !important;
+}
+
+/* ========================================
+   PAGE ACCOUNT - Bouton principal (Login/Register)
+   ======================================== */
+
+.dark .bg-linear-to-r.from-indigo-600.to-blue-600 {
+  background: linear-gradient(to right, rgb(37 99 235), rgb(67 56 202)) !important;
+  box-shadow: 0 10px 15px -3px rgb(29 78 216 / 0.35) !important;   /* Ombre plus douce */
+}
+
+.dark .bg-linear-to-r.from-indigo-600.to-blue-600:hover {
+  background: linear-gradient(to right, rgb(29 78 216), rgb(55 48 163)) !important;
+  box-shadow: 0 10px 15px -3px rgb(29 78 216 / 0.45) !important;
+}
+/* ========================================
+   PAGE ACCOUNT - Inputs (Login / Register)
+   ======================================== */
+
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="text"] {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(71 85 105) !important;
+  color: rgb(241 245 249) !important;
+}
+
+/* Focus + remplissage */
+.dark input:focus,
+.dark input:focus-within {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(96 165 250) !important;
+  box-shadow: 0 0 0 3px rgb(59 130 246 / 0.25) !important;
+  color: rgb(241 245 249) !important;
+}
+
+/* Placeholder plus visible */
+.dark input::placeholder {
+  color: rgb(148 163 184) !important;
+}
+
+/* ========================================
+   DASHBOARD HEADER - Dark Mode neutre
+   ======================================== */
+
+.dark .bg-linear-to-br.from-white.via-slate-50.to-blue-50 {
+  background: rgb(31 41 55) !important;   /* Gris neutre élégant */
+  border-color: rgb(55 65 81) !important;
+}
+
+/* ========================================
+   SIDEBAR HEADER - Dark Mode neutre
+   ======================================== */
+
+.dark .bg-linear-to-r.from-gray-50.to-blue-50 {
+  background: rgb(31 41 55) !important;   /* Gris neutre */
+  border-color: rgb(55 65 81) !important;
+}
+/* ========================================
+   BOUTON "Voir détails" - Dark mode sobre
+   ======================================== */
+
+.dark .bg-blue-600.text-white {
+  background: rgb(37 99 235) !important; /* Bleu plus profond */
+  box-shadow: none !important;           /* Supprime le glow */
+}
+
+.dark .bg-blue-600.text-white:hover {
+  background: rgb(29 78 216) !important; /* Hover plus foncé */
+  box-shadow: none !important;
+}
+
+/* ========================================
+   FICHE CLIENT - NOUVELLES CARTES ET SELECT
+   ======================================== */
+
+/* Select dropdown Fiche Client */
+.dark select.appearance-none {
+  background-color: rgb(31 41 55) !important;
+  border-color: rgb(71 85 105) !important;
+  color: rgb(241 245 249) !important;
+}
+
+.dark select.appearance-none option {
+  background-color: rgb(31 41 55) !important;
+  color: rgb(241 245 249) !important;
+}
+
+/* Cartes Stats (Rendez-vous, Pipeline, Projets) */
+.dark .bg-blue-50\/50,
+.dark .hover\:bg-blue-50:hover {
+  background-color: rgb(30 58 138 / 0.25) !important;
+}
+
+.dark .bg-orange-50\/50,
+.dark .hover\:bg-orange-50:hover {
+  background-color: rgb(154 52 18 / 0.25) !important;
+}
+
+.dark .bg-emerald-50\/50,
+.dark .hover\:bg-emerald-50:hover {
+  background-color: rgb(6 78 59 / 0.25) !important;
+}
+
+/* Cercles des icônes dans les cartes */
+.dark .bg-emerald-100\/80 {
+  background-color: rgb(6 78 59 / 0.6) !important;
+}
+
+/* Bordures des cartes */
+.dark .border-emerald-100 {
+  border-color: rgb(6 78 59 / 0.5) !important;
+}
+
+/* Textes Émeraude */
+.dark .text-emerald-700 {
+  color: rgb(110 231 183) !important; /* Émeraude clair lisible */
+}
+
+/* ========================================
+   LISTES INTERNES FICHE CLIENT (Rdv / Projets)
+   ======================================== */
+
+/* Survol des lignes Projets Associés */
+.dark .hover\:bg-emerald-50\/30:hover {
+  background-color: rgb(6 78 59 / 0.2) !important;
+}
+
+.dark .hover\:border-emerald-200:hover {
+  border-color: rgb(6 78 59 / 0.5) !important;
+}
+
+.dark .group-hover\:text-emerald-700:hover {
+  color: rgb(110 231 183) !important;
+}
+
+/* Petits badges blancs dans les listes (Dates, Pourcentages) */
+.dark .group .bg-white.text-slate-500 {
+  background-color: rgb(51 65 85) !important;
+  color: rgb(226 232 240) !important;
+  border: 1px solid rgb(71 85 105) !important;
+}
+
+/* ========================================
+   ACCORDÉON PROJETS ARCHIVÉS (VIOLET)
+   ======================================== */
+
+/* État Fermé */
+.dark .hover\:bg-violet-50\/30:hover {
+  background-color: rgb(88 28 135 / 0.2) !important;
+}
+
+.dark .bg-violet-100 {
+  background-color: rgb(88 28 135 / 0.4) !important;
+}
+
+.dark .text-violet-600,
+.dark .group-hover\:text-violet-800:hover,
+.dark .text-violet-900 {
+  color: rgb(196 181 253) !important; /* Violet clair lisible */
+}
+
+.dark .border-violet-200,
+.dark .hover\:border-violet-300:hover {
+  border-color: rgb(88 28 135 / 0.5) !important;
+}
+
+/* État Ouvert */
+.dark .bg-violet-50\/50 {
+  background-color: rgb(88 28 135 / 0.25) !important;
+}
+
+.dark .bg-violet-600 {
+  background-color: rgb(109 40 217) !important; /* Violet profond pour l'icône active */
+}
+
+.dark .border-t.border-violet-100 {
+  border-color: rgb(88 28 135 / 0.4) !important;
+}
+
+/* Ombres de l'accordéon */
+.dark .shadow-violet-100\/50,
+.dark .hover\:shadow-violet-100:hover,
+.dark .shadow-violet-200 {
+  box-shadow: 0 4px 14px 0 rgb(88 28 135 / 0.25) !important;
+}
+
+/* Lignes du tableau archivé au survol */
+.dark .hover\:bg-violet-50\/40:hover {
+  background-color: rgb(88 28 135 / 0.2) !important;
+}
+
+/* ========================================
+   BOUTONS ACTIONS DANS LES TABLEAUX (Détails / Corbeille)
+   ======================================== */
+
+.dark td .bg-blue-50 {
+  background-color: rgb(30 58 138 / 0.4) !important;
+  color: rgb(147 197 253) !important;
+}
+
+.dark td .hover\:bg-blue-100:hover {
+  background-color: rgb(30 58 138 / 0.7) !important;
+}
+
+.dark td .bg-rose-50 {
+  background-color: rgb(159 18 57 / 0.4) !important;
+  color: rgb(253 164 175) !important;
+}
+
+.dark td .hover\:bg-rose-100:hover {
+  background-color: rgb(159 18 57 / 0.7) !important;
+}
+/* ========================================
+   CORRECTIONS FINALES (Badges, Pipeline, Bouton Export)
+   ======================================== */
+
+/* 1. Badges types de rendez-vous (Appel, etc.) : Fond plus prononcé et texte plus clair */
+.dark .bg-slate-200\/50 {
+  background-color: rgb(51 65 85) !important; /* Gris ardoise soutenu */
+  color: rgb(241 245 249) !important; /* Texte presque blanc */
+  border: 1px solid rgb(71 85 105) !important;
+}
+
+/* 2. Fond de l'icône Statut Pipeline : Réduire fortement l'effet orange fluo */
+.dark .bg-orange-100\/80 {
+  background-color: rgb(124 45 18 / 0.25) !important; /* Orange/Marron très sombre et subtil */
+}
+
+/* On s'assure que l'icône elle-même reste bien lisible */
+.dark .text-orange-600 {
+  color: rgb(253 186 116) !important; /* Orange pastel */
+}
+
+/* 3. Bouton Exporter : Supprimer l'ombre claire/blanche */
+.dark .shadow-emerald-100 {
+  box-shadow: none !important;
+}
+
+/* Optionnel : Assombrir le bouton Exporter au survol en Dark Mode */
+.dark .bg-emerald-600:hover {
+  background-color: rgb(5 150 105) !important;
+}
+/* ========================================
+   STATUT ARCHIVÉ (Badge) - Correction visibilité
+   ======================================== */
+
+/* Badge dans le tableau (utilisant bg-violet-100 et text-violet-700) */
+.dark .bg-violet-100 {
+  background-color: rgb(76 29 149 / 0.3) !important; /* Fond violet très sombre et subtil */
+}
+
+.dark .text-violet-700 {
+  color: rgb(216 180 254) !important; /* Texte violet pastel clair très lisible */
+}
+
+/* Badge dans la modale détails (utilisant bg-violet-500) */
+.dark .bg-violet-500 {
+  background-color: rgb(109 40 217) !important; /* Violet profond moins agressif */
+  color: rgb(248 250 252) !important; /* Texte blanc éclatant */
+  border: 1px solid rgb(124 58 237 / 0.5) !important;
+}
+/* ========================================
+   BOUTONS ACTIONS MODALE (Restaurer / Supprimer)
+   ======================================== */
+
+/* Bouton Restaurer (Émeraude) */
+.dark .bg-emerald-50 {
+  background-color: rgb(6 78 59 / 0.25) !important; /* Fond vert très sombre */
+}
+.dark .hover\:bg-emerald-100:hover {
+  background-color: rgb(6 78 59 / 0.5) !important; /* Fond vert un peu plus visible au survol */
+}
+.dark .text-emerald-700 {
+  color: rgb(110 231 183) !important; /* Texte vert pastel brillant */
+}
+
+/* Bouton Supprimer (Rose) */
+.dark .bg-rose-50 {
+  background-color: rgb(136 19 55 / 0.25) !important; /* Fond rouge/rose très sombre */
+}
+.dark .hover\:bg-rose-100:hover {
+  background-color: rgb(136 19 55 / 0.5) !important; /* Fond rouge/rose au survol */
+}
+.dark .text-rose-700 {
+  color: rgb(253 164 175) !important; /* Texte rose pastel brillant */
+}
+/* ========================================
+   PAGE ACCOUNT (LOGIN / REGISTER) - DARK MODE
+   ======================================== */
+
+/* 1. Fond principal de la page */
+.dark .from-indigo-50.via-white.to-cyan-50 {
+  background: linear-gradient(to bottom right, rgb(15 23 42), rgb(30 41 59), rgb(15 23 42)) !important;
+}
+
+/* 2. Carte principale (Effet Glassmorphism) */
+.dark .bg-white\/80 {
+  background-color: rgb(30 41 59 / 0.8) !important;
+}
+.dark .border-white\/40 {
+  border-color: rgb(71 85 105 / 0.4) !important;
+}
+
+/* 3. Titre "CRM Eray" (Dégradé de texte) */
+.dark .from-gray-800.to-gray-600 {
+  background-image: linear-gradient(to right, rgb(241 245 249), rgb(148 163 184)) !important;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 4. Conteneur des onglets (Connexion / Inscription) */
+.dark .from-gray-100.to-gray-200\/50 {
+  background: rgb(15 23 42) !important;
+}
+
+/* 5. Onglet actif & Bouton Google */
+.dark .from-white.to-gray-50 {
+  background: rgb(51 65 85) !important;
+  color: rgb(241 245 249) !important;
+  border-color: rgb(71 85 105) !important;
+}
+/* Couleur du texte de l'onglet actif */
+.dark button.text-indigo-600.from-white {
+  color: rgb(165 180 252) !important; /* Indigo pastel clair */
+}
+
+/* 6. Champs de formulaire (Inputs) */
+.dark input.bg-white\/60 {
+  background-color: rgb(15 23 42 / 0.6) !important;
+  border-color: rgb(71 85 105 / 0.5) !important;
+  color: rgb(241 245 249) !important;
+}
+.dark input.bg-white\/60::placeholder {
+  color: rgb(100 116 139) !important;
+}
+.dark input.bg-white\/60:focus {
+  border-color: rgb(99 102 241) !important; /* Bordure Indigo */
+  box-shadow: 0 0 0 2px rgb(99 102 241 / 0.25) !important;
+  background-color: rgb(15 23 42 / 0.9) !important;
+}
+
+/* 7. Textes et labels généraux */
+.dark label.text-gray-700 {
+  color: rgb(226 232 240) !important;
+}
+.dark p.text-gray-600 {
+  color: rgb(203 213 225) !important;
+}
+.dark .text-gray-500 {
+  color: rgb(148 163 184) !important;
+}
+
+/* 8. Ligne de séparation "ou" */
+.dark .via-gray-300 {
+  border-image: linear-gradient(to right, transparent, rgb(71 85 105), transparent) 1 !important;
+}
+.dark span.bg-white\/80 {
+  background-color: rgb(30 41 59) !important; /* Identique au fond de la carte */
+  color: rgb(148 163 184) !important;
+}
+
+/* 9. Bouton Submit (Ombre) */
+.dark .shadow-indigo-200\/50 {
+  box-shadow: 0 10px 15px -3px rgb(79 70 229 / 0.3) !important;
+}
+
+/* 10. Bouton voir mot de passe (Œil) */
+.dark .text-gray-400.hover\:text-gray-600:hover {
+  color: rgb(241 245 249) !important;
+}

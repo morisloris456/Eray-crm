@@ -1,0 +1,35 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # =========================================================================
+    # 0. FORCER LE HTTPS
+    # =========================================================================
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # =========================================================================
+    # 1. LAISSER PASSER LES FICHIERS ET DOSSIERS RÉELS
+    # =========================================================================
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # =========================================================================
+    # 2. SERVIR LES IMAGES DEPUIS backend/public/uploads/
+    # =========================================================================
+    RewriteRule ^uploads/(.*)$ backend/public/uploads/$1 [QSA,L]
+
+    # =========================================================================
+    # 3. REDIRIGER /api/* VERS SYMFONY
+    # =========================================================================
+    RewriteRule ^api/(.*)$ backend/public/index.php [QSA,L]
+
+    # =========================================================================
+    # 4. TOUT LE RESTE → REACT SPA
+    # =========================================================================
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# Sécurité : Désactiver le listage des répertoires
+Options -Indexes
